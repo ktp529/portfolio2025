@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Projects</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<style>
+    /* ===== Enhanced CSS ===== */
+    :root {
+      --primary-color: #1a365d;
+      --secondary-color: #2b6cb0;
+      --accent-color: #4299e1;
+      --gradient-1: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+      --gradient-2: linear-gradient(135deg, #4299e1 0%, #63b3ed 100%);
+      --light-bg: rgba(255, 255, 255, 0.98);
+      --text-color: #2d3748;
+      --subtext-color: #4a5568;
+      --font-family: 'Montserrat', sans-serif;
+      --section-spacing: 4rem;
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: linear-gradient(to right, #f7fafc, #ebf4ff);
+      color: var(--text-color);
+      line-height: 1.7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      letter-spacing: 2px;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+      font-weight: 700;
+	  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: var(--gradient-2);
+      border-radius: 4px;
+    }
+
+    nav#menu {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 40px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: var(--transition);
+    }
+
+    nav#menu:hover {
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+    }
+
+    nav#menu ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav#menu ul li {
+      position: relative;
+    }
+
+    nav#menu ul li a {
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 600;
+      padding: 12px 24px;
+      display: block;
+      border-radius: 8px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav#menu ul li a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    nav#menu ul li a:hover {
+      color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    nav#menu ul li a:hover::before {
+      transform: scaleX(1);
+    }
+
+    nav#menu ul li ul.submenu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--light-bg);
+      list-style: none;
+      padding: 1rem 0;
+      min-width: 240px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+
+    nav#menu ul li:hover > ul.submenu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    nav#menu ul li ul.submenu li {
+      margin: 0;
+    }
+
+    nav#menu ul li ul.submenu li a {
+      padding: 0.8rem 1.5rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    section {
+      margin-bottom: 80px;
+      scroll-margin-top: 100px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2.section-title {
+      font-size: 2.5rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 40px;
+      padding-bottom: 1rem;
+      position: relative;
+      font-weight: 700;
+    }
+
+    h2.section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-2);
+      border-radius: 2px;
+    }
+
+    .project {
+      background: linear-gradient(145deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.99) 100%);
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient-2);
+      transition: width 0.3s ease;
+    }
+
+    .project:hover::before {
+      width: 6px;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+    }
+
+    .project h3 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+      position: relative;
+      font-weight: 700;
+      text-transform: uppercase;
+  letter-spacing: 0.5px;
+    }
+
+    .project h3::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 80%;
+      background: var(--gradient-2);
+      border-radius: 4px;
+    }
+
+    .project p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--subtext-color);
+      line-height: 1.8;
+    }
+
+    ul.tech-used,
+    ul.features {
+      margin-left: 2rem;
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--accent-color);
+    }
+
+    ul.tech-used li,
+    ul.features li {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 1rem;
+    }
+
+    ul.tech-used li::before
+    {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+    
+    ul.features li::before {
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+    
+    .tech-used li {
+      display: inline-block;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1.2rem;
+      background: rgba(66, 153, 225, 0.1);
+      border-radius: 20px;
+      border: 1px solid rgba(66, 153, 225, 0.2);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--secondary-color);
+    }
+
+    /* Original Image Grids (Unchanged Structure) */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      justify-items: center;
+      margin: 30px 0;
+    }
+
+    .image-item img {
+      width: 100%;
+      height: 70%;
+      max-width: 270px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .image-item:hover img {
+      transform: scale(1.03);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .image2-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      justify-items: center;
+      margin: 30px 0;
+    }
+
+    .image2-item img {
+      width: 100%;
+      height: 70%;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+    }
+
+	.image3-item img {
+  width: 100%;
+  height: auto;
+  min-height: 128px; /* Ensures the image is at least 300px tall */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+
+	
+    .image3-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+      justify-items: center;
+      margin: 30px 0;
+    }
+
+    .image-label,
+    .image2-label {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--subtext-color);
+      text-align: center;
+      line-height: 1.4;
+      padding: 0 1rem;
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      padding: 3rem;
+      font-size: 1rem;
+      color: #7f8c8d;
+      background: var(--light-bg);
+      border-radius: var(--border-radius);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    footer a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    footer a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--secondary-color);
+    }
+
+    footer a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      nav#menu ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav#menu ul li {
+        width: 100%;
+        text-align: center;
+      }
+
+      .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project {
+        padding: 1.5rem;
+      }
+
+      .project h3 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+	
+	/* Ensure the container doesn’t add extra line-height spacing */
+.stacked-images {
+  line-height: 0;
+}
+
+/* Remove default spacing between images and display them as blocks */
+.stacked-images img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Optional: if you have border-radius on images and want a unified look,
+   remove the adjacent radii so that the images merge smoothly */
+.stacked-images img:first-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.stacked-images img:last-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.horizontal-images {
+  display: flex;
+  gap: 0; /* Removes any gap between images */
+}
+
+/* Ensure images are block elements with no extra spacing */
+.horizontal-images img {
+  display: block;
+  width: 50%; /* Adjust the width as needed, or use fixed dimensions */
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Optional: If you have border-radius applied and want them to look like a single image,
+   remove the adjacent border radii */
+.horizontal-images img:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.horizontal-images img:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Portfolio - Projects</h1>
+    </header>
+
+    <!-- Interactive Navigation Menu -->
+    <nav id="menu">
+      <ul>
+        <li>
+          <a href="#university-projects">University Projects</a>
+          <ul class="submenu">
+            <li><a href="#smart-visitor-access">Smart Visitor Access System</a></li>
+            <li><a href="#iot-farming-system">IoT-Based Farming System</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#personal-projects">Personal Projects</a>
+          <ul class="submenu">
+            <li><a href="#network-lab">Enterprise Network Redundancy & VLAN Implementation</a></li>
+			<li><a href="#security-lab">Enterprise Network Security Implementation</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- University Projects Section -->
+    <section id="university-projects">
+      <h2 class="section-title">University Projects</h2>
+      
+      <!-- Project 1: Smart Visitor Access System -->
+      <article class="project" id="smart-visitor-access">
+        <h3>Smart Visitor Access System</h3>
+        <p><strong>Description:</strong> This mobile app allows apartment residents to manage visitor access by filling out a visitor form and generating time-limited QR codes. Visitors can use the QR code to unlock the door, and residents can contact the guard house or management directly from the app.</p>
+        <p><strong>Technologies Used:</strong></p>
+        <ul class="tech-used">
+          <li>Flutter</li>
+          <li>Dart</li>
+          <li>ESP32</li>
+          <li>Firebase (Cloud Server)</li>
+          <li>XAMPP Server (Local SQL Server) - Using PHP</li>
+        </ul>
+        <p><strong>Features:</strong></p>
+        <ul class="features">
+          <li>Time-limited QR code generation for visitor access.</li>
+          <li>Real-time visitor tracking.</li>
+          <li>Integration with Firebase for storing visitor data and managing access.</li>
+        </ul>
+        <!-- 四欄圖片網格 (Grid remains unchanged) -->
+        <div class="image-grid">
+          <div class="image-item">
+            <img src="u1.jpeg" alt="User can login as resident or admin." />
+            <p class="image-label">User can login as resident or admin.</p>
+          </div>
+          <div class="image-item">
+            <img src="u2.jpeg" alt="Admin can track real-time visitor requests." />
+            <p class="image-label">Admin can track real-time visitor requests.</p>
+          </div>
+          <div class="image-item">
+            <img src="u3.jpeg" alt="Resident can contact management, guard house for help, or fill visitor form to request qr code." />
+            <p class="image-label">Resident can contact management, guard house for help, or fill visitor form to request qr code to enter the resident area.</p>
+          </div>
+          <div class="image-item">
+            <img src="u4.jpeg" alt="Resident form contents." />
+            <p class="image-label">Resident form contents.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2: IoT-Based Farming System -->
+      <article class="project" id="iot-farming-system">
+        <h3>IoT-Based Farming System</h3>
+        <p><strong>Description:</strong> A smart irrigation system using fuzzy logic to optimize water usage based on real-time soil moisture data, aimed at efficient farming.</p>
+        <p><strong>Technologies Used:</strong></p>
+        <ul class="tech-used">
+          <li>Arduino</li>
+          <li>ESP32</li>
+          <li>Fuzzy Logic</li>
+          <li>Sensors</li>
+          <li>Firebase</li>
+        </ul>
+        <p><strong>Features:</strong></p>
+        <ul class="features">
+          <li>Automated soil moisture monitoring and irrigation</li>
+          <li>Remote monitoring via a Blynk app</li>
+          <li>Customizable moisture thresholds using fuzzy logic</li>
+        </ul>
+        <!-- 兩欄圖片網格 (Grid remains unchanged) -->
+        <div class="image2-grid">
+          <div class="image2-item">
+            <img src="u6.jpg" alt="Blynk app mobile interface." />
+            <p class="image2-label">Blynk app mobile interface.</p>
+          </div>
+          <div class="image2-item">
+            <img src="u5.jpg" alt="Firestore dashboard." />
+            <p class="image2-label">Firestore dashboard.</p>
+          </div>
+        </div>
+        <!-- 單欄圖片網格 (Grid remains unchanged) -->
+        <div class="image3-grid">
+          <div class="image2-item">
+            <img src="u7.png" alt="Fuzzy rule table." />
+            <p class="image2-label">Fuzzy rule table.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Personal Projects Section -->
+<section id="personal-projects">
+  <h2 class="section-title">Personal Projects</h2>
+  
+  <!-- Network Redundancy and VLAN Implementation -->
+  <article class="project" id="network-lab">
+    <h3>Enterprise Network Redundancy & VLAN Implementation</h3>
+    <p><strong>Description:</strong> Designed and deployed a fault-tolerant network infrastructure with HSRP redundancy and VLAN segmentation. Implemented cross-VLAN routing with 0% packet loss and validated failover mechanisms through controlled interface shutdown tests.</p>
+    
+    <p><strong>Technologies Used:</strong></p>
+    <ul class="tech-used">
+      <li>Cisco Packet Tracer</li>
+      <li>HSRP (Hot Standby Router Protocol)</li>
+      <li>VLAN configuration</li>
+      <li>Inter-VLAN Routing</li>
+      <li>Network Troubleshooting</li>
+    </ul>
+
+    <p><strong>Features:</strong></p>
+    <ul class="features">
+      <li>Dual-router redundancy with HSRP preemption</li>
+      <li>VLAN segmentation (HR & Sales departments)</li>
+      <li>Cross-switch connectivity testing</li>
+      <li>Comprehensive failover validation</li>
+    </ul>
+
+    <!-- Image Grid -->
+    <div class="image2-grid">
+      <!-- Network Topology -->
+      <div class="image2-item">
+        <img src="network_tp.jpg" alt="Network Topology" />
+        <p class="image2-label">Network Architecture: Dual switches with VLAN 10/20 connected to redundant routers</p>
+      </div>
+	  
+	  <!-- HSRP Status -->
+	  <div class="image3-item">
+	<div class="stacked-images">
+		<img src="R0stb.jpg" alt="HSRP Status Verification" />
+		<img src="R1stb.jpg" alt="HSRP Status Verification Part 2" />
+	</div>
+	<p class="image2-label">
+		HSRP Status: Active/Standby verification using show standby command
+	</p>
+	</div>
+	</div>
+
+      <!-- Ping Test Results -->
+	  <div class="image3-grid">
+      <div class="image2-item">
+	  <div class="horizontal-images">
+        <img src="pc0-pc2.jpg" alt="Cross-VLAN Ping Test" />
+		<img src="pc2-pc0.jpg" alt="Cross-VLAN Ping Test2" />
+      </div>
+	  <p class="image2-label">0% Packet Loss: Successful ping between PC0 (VLAN10) and PC2 (VLAN20)</p>
+	  </div>
+
+	  <!-- Redundancy Test -->
+      <div class="image2-item">
+        <img src="router redund.jpg" alt="HSRP Failover Test" />
+        <p class="image2-label">HSRP Failover: Router1 transitioning from Standby to Active after Router0 shutdown</p>
+      </div>
+	  </div>
+    </div>
+  </article>
+  
+  <!-- Project 2: Network Security Implementation with OPNsense -->
+<article class="project" id="security-lab">
+  <h3>Enterprise Network Security Implementation</h3>
+  <p><strong>Description:</strong> Designed and deployed a secure network infrastructure using OPNsense firewall with Suricata IDS, including threat detection configuration and real attack simulation. Conducted penetration testing with Kali Linux and documented security events with mitigation strategies.</p>
+
+  <p><strong>Technologies Used:</strong></p>
+  <ul class="tech-used">
+    <li>VirtualBox</li>
+    <li>OPNsense Firewall</li>
+    <li>Suricata IDS</li>
+    <li>Kali Linux</li>
+  </ul>
+
+  <p><strong>Key Features:</strong></p>
+  <ul class="features">
+    <li>Stateful firewall rule configuration</li>
+    <li>Real-time intrusion detection system</li>
+    <li>Network vulnerability scanning</li>
+    <li>Real-time security event logging</li>
+    <li>Multi-port attack prevention (SSH, HTTPS, custom ports)</li>
+  </ul>
+
+  <div class="image2-grid">
+    <!-- Row 1 -->
+    <div class="image2-item">
+      <img src="opn-dashboard.jpg" alt="OPNsense Dashboard" />
+      <p class="image2-label">OPNsense Web Dashboard - Central security management interface</p>
+    </div>
+    
+    <div class="image2-item">
+      <img src="fire2.jpg" alt="Firewall Log Config" />
+      <p class="image2-label">Firewall Logging Configuration - Detailed traffic monitoring setup</p>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="image2-item">
+      <img src="simulated-serv.jpg" alt="Network Simulation" />
+      <p class="image2-label">Simulated enterprise network environment</p>
+    </div>
+
+    <div class="image2-item">
+      <img src="nmap scan.jpg" alt="Nmap Results" />
+      <p class="image2-label">Penetration Test Results - Aggressive Nmap scan (-A flag) output</p>
+    </div>
+  </div>
+
+  <!-- Single Column for Security Logs -->
+  <div class="image3-grid">
+    <div class="image2-item">
+      <img src="firewall-log.jpg" alt="Security Logs" />
+      <p class="image2-label">Firewall Security Event: Blocked inbound TCP connections from 192.168.1.100 to 192.168.1.1.</p>
+    </div>
+  </div>
+</article>
+</section>
+
+
+  </div>
+
+  <footer>
+    © 2025 Lim Kian Sheng | <a href="mailto:limksheng77@gmail.com">Contact Me</a>
+  </footer>
+
+  <!-- ===== JavaScript: 平滑滾動效果 ===== -->
+  <script>
+    // Enhanced JavaScript with intersection observer for scroll animations
+    const sections = document.querySelectorAll('section');
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Smooth scroll for anchor links
+// Enhanced smooth scroll with adjustable offset
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      const header = document.querySelector('#menu');
+      const headerHeight = header.offsetHeight;
+      // Add an extra offset (e.g., 20px) to ensure enough space for the title
+      const additionalOffset = 30; // Adjust this value as needed
+      const totalOffset = headerHeight + additionalOffset;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  });
+});
+
+
+  </script>
+</body>
+</html>
